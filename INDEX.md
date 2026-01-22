@@ -21,14 +21,14 @@ It is designed as a **living document** to:
 ## ✅ Core Java
 
 ### 🔹 Java Basics & JVM
-- [ ] Java execution flow (JDK, JRE, JVM)
-- [ ] How Java code runs (compile → bytecode → execution)
-- [ ] ClassLoader subsystem
-- [ ] JVM runtime data areas
-- [ ] Platform independence – myths & facts
+- [✔️] Java execution flow (JDK, JRE, JVM)
+- [✔️] How Java code runs (compile → bytecode → execution)
+- [✔️] ClassLoader subsystem
+- [✔️] JVM runtime data areas
+- [✔️] Platform independence – myths & facts
 
 📁 **Folder:**  
-👉 [core-java/01-java-execution](core-java/01-java-execution/README.md)
+👉 [core-java/01-java-execution](core-java/01-java-execution/notes.md)
 
 ---
 
@@ -40,7 +40,7 @@ It is designed as a **living document** to:
 - [ ] Memory leaks (conceptual)
 
 📁 **Folder:**  
-👉 [core-java/02-memory-model](core-java/02-memory-model/README.md)
+👉 [core-java/02-memory-model](core-java/02-memory-model/notes.md)
 
 ---
 
@@ -52,7 +52,7 @@ It is designed as a **living document** to:
 - [ ] Composition vs Inheritance
 
 📁 **Folder:**  
-👉 [core-java/03-oop](core-java/03-oop/README.md)
+👉 [core-java/03-oop](core-java/03-oop/notes.md)
 
 ---
 
@@ -64,7 +64,7 @@ It is designed as a **living document** to:
 - [ ] Shallow vs Deep copy
 
 📁 **Folder:**  
-👉 [core-java/04-object-design](core-java/04-object-design/README.md)
+👉 [core-java/04-object-design](core-java/04-object-design/notes.md)
 
 ---
 
@@ -80,7 +80,7 @@ It is designed as a **living document** to:
 - [ ] Time complexity & performance
 
 📁 **Folder:**  
-👉 [collections](collections/README.md)
+👉 [collections](collections/notes.md)
 
 ---
 
@@ -93,7 +93,7 @@ It is designed as a **living document** to:
 - [ ] Common interview traps
 
 📁 **Folder:**  
-👉 [exception-handling](exception-handling/README.md)
+👉 [exception-handling](exception-handling/notes.md)
 
 ---
 
@@ -106,7 +106,7 @@ It is designed as a **living document** to:
 - [ ] Java 8 concurrency improvements
 
 📁 **Folder:**  
-👉 [java-8](java-8/README.md)
+👉 [java-8](java-8/notes.md)
 
 ---
 
@@ -123,7 +123,7 @@ It is designed as a **living document** to:
 - [ ] Real backend concurrency scenarios
 
 📁 **Folder:**  
-👉 [multithreading](multithreading/README.md)
+👉 [multithreading](multithreading/notes.md)
 
 ---
 
@@ -137,7 +137,7 @@ It is designed as a **living document** to:
 - [ ] Common annotations
 
 📁 **Folder:**  
-👉 [spring-core](spring-core/README.md)
+👉 [spring-core](spring-core/notes.md)
 
 ---
 
@@ -149,7 +149,7 @@ It is designed as a **living document** to:
 - [ ] Configuration & profiles
 
 📁 **Folder:**  
-👉 [spring-boot](spring-boot/README.md)
+👉 [spring-boot](spring-boot/notes.md)
 
 ---
 
@@ -161,7 +161,7 @@ It is designed as a **living document** to:
 - [ ] Interview-level security flow
 
 📁 **Folder:**  
-👉 [spring-security](spring-security/README.md)
+👉 [spring-security](spring-security/notes.md)
 
 ---
 
@@ -174,7 +174,7 @@ It is designed as a **living document** to:
 - [ ] Tricky / trap questions
 
 📁 **Folder:**  
-👉 [interview-qa](interview-qa/README.md)
+👉 [interview-qa](interview-qa/notes.md)
 
 ---
 
