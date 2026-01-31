@@ -1,76 +1,109 @@
-## 🎯 `interview-questions.md` — Lesson 6
+---
+title: Interview Questions – Garbage Collection (GC)
+lesson: 6
+---
 
-```md
-# Interview Questions – Garbage Collection (GC)
+# 🎯 Interview Questions: Garbage Collection (GC)
+
+This document covers **core garbage collection concepts**, **decision mechanisms**, and **performance implications**, commonly tested in Java backend interviews.
 
 ---
 
-## Q1. What is Garbage Collection in Java?
+## 1. What is Garbage Collection in Java?
 
-### Answer:
-Garbage Collection is a JVM process that automatically reclaims heap memory by removing objects that are no longer reachable.
+### ✅ Answer
+Garbage Collection is a JVM process that **automatically reclaims heap memory** by removing objects that are no longer reachable.
 
----
-
-## Q2. How does JVM decide which objects to collect?
-
-### Answer:
-JVM uses reachability analysis. Objects not reachable from any GC root are eligible for garbage collection.
+It eliminates the need for manual memory deallocation.
 
 ---
 
-## Q3. What are GC roots?
+## 2. How does the JVM decide which objects to collect?
 
-### Answer:
-GC roots include active thread stacks, static variables, and JNI references from which object reachability is determined.
+### ✅ Answer
+The JVM uses **reachability analysis**.
 
----
-
-## Q4. Why does JVM use generational garbage collection?
-
-### Answer:
-Because most objects die young, generational GC improves performance by frequently collecting short-lived objects.
+Objects that are **not reachable from any GC root** are eligible for garbage collection.
 
 ---
 
-## Q5. What is Stop-The-World?
+## 3. What are GC roots?
 
-### Answer:
-Stop-The-World is a phase during garbage collection where all application threads are paused to safely perform GC.
+### ✅ Answer
+GC roots are starting points for reachability analysis, including:
+- active thread stacks (local variables)
+- static variables
+- JNI references
 
----
-
-## Q6. What is the difference between Minor GC and Full GC?
-
-### Answer:
-Minor GC runs on the Young Generation and is fast, while Full GC runs on the Old Generation and is slower with longer pauses.
+Objects reachable from GC roots are considered alive.
 
 ---
 
-## Q7. Can `System.gc()` force garbage collection?
+## 4. Why does the JVM use generational garbage collection?
 
-### Answer:
-No. `System.gc()` only requests GC, and the JVM decides whether to run it.
+### ✅ Answer
+Because **most objects die young**.
 
----
-
-## Q8. What causes GC performance issues in backend applications?
-
-### Answer:
-Excessive object creation, large objects, static references, and improper caching can increase GC pressure.
+By separating objects into generations, the JVM can:
+- collect short-lived objects frequently
+- reduce GC overhead
+- improve overall performance
 
 ---
 
-## Common Interview Traps & Pitfalls
+## 5. What is Stop-The-World (STW)?
 
-❌ Saying GC runs immediately when object is unreachable  
-❌ Saying GC is based on reference counting  
-❌ Saying `System.gc()` guarantees GC  
-❌ Ignoring Stop-The-World impact  
+### ✅ Answer
+Stop-The-World is a GC phase during which **all application threads are paused** so the JVM can safely perform garbage collection.
+
+Some GC algorithms minimize STW duration, but they cannot eliminate it completely.
 
 ---
 
-## One Interview-Safe Explanation
+## 6. What is the difference between Minor GC and Full GC?
 
-> “Garbage Collection in Java automatically reclaims heap memory by removing objects that are no longer reachable. The JVM uses a generational approach to optimize performance while minimizing pause times.”
+### ✅ Answer
+- **Minor GC** runs on the **Young Generation** and is usually fast
+- **Full GC** runs on the **Old Generation**, is more expensive, and causes longer pauses
 
+Full GC has a higher performance impact on backend applications.
+
+---
+
+## 7. Can `System.gc()` force garbage collection?
+
+### ❌ No.
+
+### ✅ Correct Explanation
+`System.gc()` only **requests** garbage collection.  
+The JVM decides **if and when** GC actually runs.
+
+---
+
+## 8. What causes GC performance issues in backend applications?
+
+### ✅ Answer
+Common causes include:
+- excessive object creation
+- large or long-lived objects
+- static references holding memory
+- improperly managed caches
+
+High allocation rates increase GC pressure.
+
+---
+
+## 🚫 Common Interview Traps & Pitfalls
+
+- ❌ Saying GC runs immediately when an object becomes unreachable
+- ❌ Claiming GC is based on reference counting
+- ❌ Saying `System.gc()` guarantees garbage collection
+- ❌ Ignoring Stop-The-World pause impact
+
+---
+
+## 🧠 One Interview-Safe Explanation
+
+> “Garbage Collection in Java automatically reclaims heap memory by removing unreachable objects. The JVM uses a generational approach to improve performance while managing pause times.”
+
+---

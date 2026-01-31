@@ -1,71 +1,86 @@
+---
+title: Interview Questions – Method Area & Metaspace
+lesson: 4
+---
 
+# 🎯 Interview Questions: Method Area & Metaspace
 
-# 🎯 `interview-questions.md` — Lesson 4
-
-```md
-# Interview Questions – Method Area & Metaspace
+This file contains **frequently asked interview questions**, **common traps**, and **safe explanations** related to the JVM Method Area and Metaspace.
 
 ---
 
-## Q1. What is stored in the Method Area?
+## 1. What is stored in the Method Area?
 
-### Answer:
-The Method Area stores class-level information such as class metadata, method bytecode, static variables, and the runtime constant pool.
-
----
-
-## Q2. What is Metaspace?
-
-### Answer:
-Metaspace is the implementation of the Method Area in Java 8 and later, which uses native memory and grows dynamically.
+### ✅ Answer
+The Method Area stores **class-level information**, including:
+- class metadata
+- method bytecode
+- static variables
+- runtime constant pool
 
 ---
 
-## Q3. Why was PermGen removed?
+## 2. What is Metaspace?
 
-### Answer:
-PermGen had a fixed size and caused frequent OutOfMemoryErrors. Metaspace uses native memory and allows dynamic growth.
-
----
-
-## Q4. Where are static variables stored?
-
-### Answer:
-Static variables are stored in the Method Area (Metaspace).
+### ✅ Answer
+Metaspace is the **Java 8+ implementation of the Method Area**.  
+It uses **native memory** instead of heap memory and **grows dynamically**.
 
 ---
 
-## Q5. Why are static variables shared across threads?
+## 3. Why was PermGen removed?
 
-### Answer:
-Static variables have one copy per class, and all threads access the same class-level data.
+### ✅ Answer
+PermGen had a **fixed size**, which frequently caused  
+`OutOfMemoryError: PermGen space`.
 
----
-
-## Q6. Why is static state dangerous in backend applications?
-
-### Answer:
-Because static variables are shared across threads and requests, they can lead to race conditions, inconsistent data, and concurrency issues.
+Metaspace removes this limitation by using **native memory** and allowing dynamic growth.
 
 ---
 
-## Q7. How is a Spring singleton different from a static variable?
+## 4. Where are static variables stored?
 
-### Answer:
-A Spring singleton is managed by the container with lifecycle control, while static variables are unmanaged global state.
-
----
-
-## Common Interview Traps & Pitfalls
-
-❌ Saying static variables are stored in heap  
-❌ Confusing heap with Method Area  
-❌ Saying Metaspace is part of heap  
-❌ Treating static variables as thread-safe  
+### ✅ Answer
+Static variables are stored in the **Method Area**, which is implemented as **Metaspace** in Java 8 and later.
 
 ---
 
-## One Interview-Safe Explanation
+## 5. Why are static variables shared across threads?
 
-> “The Method Area stores class-level information such as static variables and method bytecode. In Java 8+, this is implemented using Metaspace, which uses native memory and grows dynamically.”
+### ✅ Answer
+Static variables have **one copy per class**, and the class is shared across all threads inside the JVM.
 
+---
+
+## 6. Why is static state dangerous in backend applications?
+
+### ✅ Answer
+Static variables are **shared across threads and requests**, which can cause:
+- race conditions
+- inconsistent data
+- hard-to-debug concurrency issues
+
+---
+
+## 7. How is a Spring singleton different from a static variable?
+
+### ✅ Answer
+A Spring singleton is **container-managed**, with controlled lifecycle and dependency injection.  
+Static variables are **unmanaged global state** with no lifecycle or thread-safety guarantees.
+
+---
+
+## 🚫 Common Interview Traps & Pitfalls
+
+- ❌ Saying static variables are stored in the heap
+- ❌ Confusing heap memory with the Method Area
+- ❌ Saying Metaspace is part of the Java heap
+- ❌ Assuming static variables are thread-safe
+
+---
+
+## 🧠 One Interview-Safe Explanation
+
+> “The Method Area stores class-level information like static variables and method bytecode. Since Java 8, it’s implemented using Metaspace, which uses native memory and grows dynamically.”
+
+---
