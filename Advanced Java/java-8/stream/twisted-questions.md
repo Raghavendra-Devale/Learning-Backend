@@ -1,59 +1,173 @@
-# Java Streams — Twisted / Trap Questions
 
 ---
 
-1. Will this execute?
-
-   list.stream().map(String::toUpperCase);
-
-   Answer:
-   No terminal operation.
+# ✅ Java Streams — Twisted / Trap Questions (With Deep Explanation)
 
 ---
 
-2. What happens here?
+### 1️⃣ Will this execute?
 
-   Stream<String> s = list.stream();
-   s.forEach(System.out::println);
-   s.forEach(System.out::println);
+```java
+list.stream().map(String::toUpperCase);
+```
 
-   Answer:
-   IllegalStateException.
+**Answer:**
+No.
 
----
+**Why?**
 
-3. Is this good practice?
+Because there is no terminal operation.
+Streams are lazy. Intermediate operations like `map()` only build the pipeline.
+Execution starts only when a terminal operation is invoked.
 
-   List<String> result = new ArrayList<>();
-   list.stream().forEach(result::add);
-
-   Answer:
-   Works but violates functional style (side effects).
+Interview keyword: **Lazy evaluation**
 
 ---
 
-4. Why might distinct() fail to remove duplicates?
+### 2️⃣ What happens here?
 
-   equals() and hashCode() not overridden.
+```java
+Stream<String> s = list.stream();
+s.forEach(System.out::println);
+s.forEach(System.out::println);
+```
 
----
+**Answer:**
+Throws `IllegalStateException`.
 
-5. What happens if toMap has duplicate keys and no merge function?
+**Why?**
 
-   IllegalStateException.
+Streams are single-use.
+Once a terminal operation is executed, the stream is considered consumed and closed.
 
----
-
-6. Is parallelStream always faster?
-
-   No.
-
----
-
-7. Why can limit() stop early?
-
-   It is short-circuiting.
+Interview keyword: **Consumed stream**
 
 ---
 
-End of Twisted Questions.
+### 3️⃣ Is this good practice?
+
+```java
+List<String> result = new ArrayList<>();
+list.stream().forEach(result::add);
+```
+
+**Answer:**
+It works, but it is not good practice.
+
+**Why?**
+
+* Introduces side effects
+* Breaks functional style
+* Not safe in parallel streams
+* Reduces readability
+
+Better:
+
+```java
+List<String> result = list.stream().toList();
+```
+
+Interview keyword: **Side effects**
+
+---
+
+### 4️⃣ Why might distinct() fail to remove duplicates?
+
+**Answer:**
+If `equals()` and `hashCode()` are not properly overridden.
+
+**Why?**
+
+`distinct()` internally uses a `HashSet`.
+Duplicate detection depends on `equals()` and `hashCode()`.
+
+This is a very common trap for custom objects.
+
+---
+
+### 5️⃣ What happens if toMap has duplicate keys and no merge function?
+
+**Answer:**
+Throws `IllegalStateException`.
+
+Because `toMap()` cannot resolve duplicate keys unless a merge function is provided.
+
+---
+
+### 6️⃣ Is parallelStream always faster?
+
+**Answer:**
+No.
+
+Parallel streams may be slower due to:
+
+* Thread management overhead
+* Small datasets
+* Synchronization cost
+* Blocking operations
+
+Parallel helps only for large CPU-bound workloads.
+
+---
+
+### 7️⃣ Why can limit() stop early?
+
+**Answer:**
+Because `limit()` is a short-circuiting intermediate operation.
+
+It stops processing once the required number of elements is reached.
+
+Important: It improves performance in large streams.
+
+---
+
+# 🔥 Additional Twisted Questions (Advanced Traps)
+
+---
+
+### 8️⃣ What happens if you modify the source collection during streaming?
+
+Example:
+
+```java
+list.stream().forEach(e -> list.add("new"));
+```
+
+**Answer:**
+May throw `ConcurrentModificationException`.
+
+Streams require **non-interference** — the source should not be modified during processing.
+
+---
+
+### 9️⃣ What is wrong with this in parallel stream?
+
+```java
+int[] sum = {0};
+list.parallelStream().forEach(n -> sum[0] += n);
+```
+
+**Answer:**
+Race condition.
+
+Why?
+Because multiple threads update shared mutable state.
+
+Correct approach:
+
+```java
+int sum = list.parallelStream().reduce(0, Integer::sum);
+```
+
+Interview keyword: **Stateless lambda**
+
+---
+
+### 🔟 Does stream guarantee order?
+
+Depends.
+
+* Sequential stream preserves encounter order.
+* Parallel stream may not (unless using forEachOrdered).
+
+---
