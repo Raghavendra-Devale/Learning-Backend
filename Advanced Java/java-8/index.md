@@ -146,5 +146,3 @@ Next Module:
 - System-level Exception Handling
 
 ---
-
-End of Java 8 Index.
