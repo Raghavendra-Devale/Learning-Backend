@@ -1,6 +1,5 @@
 # 🎯 `interview-questions.md` — Lesson 3
 
-```md
 # Interview Questions – JVM Stack vs Heap
 
 ---
