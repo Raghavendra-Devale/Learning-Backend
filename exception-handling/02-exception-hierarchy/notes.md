@@ -1,150 +1,195 @@
-# Exception Handling – Lesson 2  
+
+
+# Exception Handling — Lesson 2
+
 ## Exception Hierarchy & RuntimeException Philosophy
 
-This lesson explains the Java exception hierarchy, the purpose of RuntimeException, and how exception design is handled in real backend systems.
+This lesson explains the Java exception hierarchy, the role of `RuntimeException`, and how exception design is applied in modern backend systems.
+
+The goal is to understand **why Java separates exceptions the way it does**.
 
 ---
 
-## 1. Root of Exception Hierarchy
+## 1. Root of the Exception Hierarchy
 
-The root class of all exceptions and errors in Java is:
+The root of all throwable objects in Java is:
 
+```
 Throwable
+```
 
-Everything that can be thrown in Java extends Throwable.
+Anything that can be thrown using `throw` or propagated by the JVM must extend `Throwable`.
 
 ---
 
 ## 2. Throwable Hierarchy
 
-Throwable has two direct subclasses:
-- Error
-- Exception
+`Throwable` has two direct subclasses:
 
-This separation is intentional and fundamental to Java’s design.
+* `Error`
+* `Exception`
+
+This separation distinguishes **system failures** from **application-level problems**.
+
+```
+Throwable
+ ├── Error
+ └── Exception
+      ├── Checked Exceptions
+      └── RuntimeException (Unchecked)
+```
 
 ---
 
 ## 3. Error
 
-Error represents:
-- JVM-level or system-level problems
-- Resource exhaustion or environment failures
+`Error` represents:
+
+* JVM-level failures
+* Resource exhaustion
+* Serious environmental problems
 
 Examples:
-- OutOfMemoryError
-- StackOverflowError
 
-Best practice:
-- Applications should not catch or extend Error
-- Errors indicate the environment is broken
+* `OutOfMemoryError`
+* `StackOverflowError`
+* `VirtualMachineError`
+
+**Best Practice**
+
+* Applications should not catch or extend `Error`
+* Recovery is usually unsafe because the runtime environment may already be unstable
+
+Errors indicate the system itself is failing, not the application logic.
 
 ---
 
 ## 4. Exception
 
-Exception represents application-level problems.
+`Exception` represents problems occurring at the application level.
 
 It is divided into:
-- Checked exceptions
-- Unchecked exceptions (RuntimeException)
 
-This division defines Java’s error-handling philosophy.
+* Checked exceptions
+* Unchecked exceptions (`RuntimeException`)
+
+This division reflects Java’s approach to handling different kinds of failures.
 
 ---
 
 ## 5. Checked Exceptions
 
 Checked exceptions:
-- Are checked at compile time
-- Must be handled or declared
-- Represent recoverable conditions
+
+* Are verified at compile time
+* Must be handled or declared
+* Represent conditions callers may reasonably recover from
 
 Examples:
-- IOException
-- SQLException
+
+* `IOException`
+* `SQLException`
+* `ClassNotFoundException`
 
 Use checked exceptions when:
-- Caller can reasonably recover
-- External systems are involved
-- API boundaries exist
+
+* External resources are involved (files, networks, databases)
+* Failure is expected and recoverable
+* API contracts must explicitly communicate risk
 
 ---
 
 ## 6. RuntimeException (Unchecked Exceptions)
 
-RuntimeException represents:
-- Programming mistakes
-- Invalid arguments
-- Illegal object state
-- Broken assumptions
+`RuntimeException` represents:
+
+* Programming mistakes
+* Invalid input or arguments
+* Incorrect object state
+* Violated assumptions
 
 Examples:
-- NullPointerException
-- IllegalArgumentException
-- IllegalStateException
-- IndexOutOfBoundsException
 
-Best practice:
-- Do not catch to recover
-- Fix the code instead
+* `NullPointerException`
+* `IllegalArgumentException`
+* `IllegalStateException`
+* `IndexOutOfBoundsException`
+
+**Best Practice**
+
+Do not catch these merely to continue execution.
+They usually indicate defects that should be fixed in code.
 
 ---
 
 ## 7. Why RuntimeException Exists
 
-RuntimeException exists because:
-- Not all failures should be forced to be handled
-- Some problems indicate bugs, not recoverable conditions
-- Forcing handling would hide bugs
+Java includes `RuntimeException` because:
+
+* Not all failures should require mandatory handling
+* Some problems indicate developer errors rather than recoverable conditions
+* Forced handling would encourage meaningless try–catch blocks
 
 Design principle:
-- Fail fast on programmer errors
+
+> Programmer errors should fail fast and visibly.
 
 ---
 
 ## 8. Recoverable vs Non-Recoverable Rule
 
-- Recoverable problems → Checked exceptions
-- Programming bugs → RuntimeException
+A practical guideline for exception design:
 
-This rule guides exception design.
+* **Recoverable problems** → Checked exceptions
+* **Programming errors or invalid state** → RuntimeException
+
+This distinction helps determine whether callers should be forced to react.
 
 ---
 
 ## 9. Modern Backend Exception Design
 
-Modern frameworks (Spring, Hibernate):
-- Prefer RuntimeException
-- Wrap checked exceptions
-- Handle errors at system boundaries
+Modern backend frameworks (Spring, Hibernate, etc.) commonly:
 
-This avoids polluting method signatures.
+* Prefer unchecked exceptions
+* Wrap checked exceptions into runtime exceptions
+* Handle failures at application boundaries (controllers, filters, handlers)
+
+Reason:
+
+* Cleaner APIs
+* Reduced boilerplate
+* Better compatibility with functional and async programming models
 
 ---
 
 ## 10. Catching Exceptions — Best Practice
 
 Catch exceptions only when you can:
-- Recover
-- Translate
-- Add context
-- Log meaningfully
 
-Avoid catching exceptions just to suppress them.
+* Recover from the problem
+* Translate it into a higher-level exception
+* Add meaningful context
+* Log appropriately
+
+Avoid catching exceptions simply to suppress them.
 
 ---
 
 ## 11. Exception Translation
 
-Lower layers:
-- Throw RuntimeException
+A common backend pattern:
 
-Upper layers:
-- Translate exceptions
-- Map them to user-friendly responses
+**Lower layers (repository / infrastructure):**
 
-This keeps business logic clean.
+* Throw technical exceptions
+
+**Service or boundary layers:**
+
+* Translate exceptions into domain-specific errors
+* Convert them into user-facing responses
+
+This keeps business logic independent from low-level failures.
 
 ---
 
@@ -153,3 +198,4 @@ This keeps business logic clean.
 > “Java’s exception hierarchy separates unrecoverable system errors from application-level exceptions, and further distinguishes recoverable checked exceptions from programming errors represented by RuntimeException.”
 
 ---
+

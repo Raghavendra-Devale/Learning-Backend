@@ -1,92 +1,145 @@
-# ⚠️ Java Exception Handling — Complete Notes & Interview Prep
 
-This section contains **end-to-end, interview-focused exception handling notes**, covering
-fundamentals, design philosophy, and real-world backend best practices.
 
-The content is structured lesson-wise so each topic can be revised independently
-based on **experience level (fresher → 2–3 YOE)**.
+# ⚠️ Java Exception Handling — Complete Notes & Interview Preparation
+
+This section provides **end-to-end, interview-focused notes** on Java Exception Handling, covering:
+
+* core fundamentals
+* design philosophy
+* exception hierarchy
+* real-world backend practices
+* production-level error handling patterns
+
+Content is organized lesson-wise so each topic can be revised independently based on **experience level (Fresher → 2–3 Years Backend Experience)**.
 
 ---
 
 ## ⚠️ Exception Handling Index
 
+---
+
 ### 01. Fundamentals & Philosophy
 
-**Concepts**
-- Why exceptions exist
-- Error vs Exception
-- Checked vs unchecked exceptions
-- try–catch–finally semantics
-- Exception propagation
-- Why swallowing exceptions is dangerous
+**Concepts Covered**
 
-- 📘 [Notes](./01-fundamentals/notes.md)
-- 🎯 [Interview Questions](./01-fundamentals/interview-questions.md)
+* Why exceptions exist
+
+* Difference between `Error` and `Exception`
+
+* Checked vs unchecked exceptions
+
+* `try–catch–finally` semantics
+
+* Exception propagation
+
+* Why swallowing exceptions is dangerous
+
+* 📘 [Notes](./01-fundamentals/notes.md)
+
+* 🎯 [Interview Questions](./01-fundamentals/interview-questions.md)
 
 ---
 
 ### 02. Exception Hierarchy & RuntimeException Design
 
-**Concepts**
-- `Throwable` as the root class
-- Error vs Exception vs RuntimeException
-- Why RuntimeException exists
-- Recoverable vs non-recoverable failures
-- Modern backend exception philosophy
-- Where exceptions should be caught
+**Concepts Covered**
 
-- 📘 [Notes](./02-exception-hierarchy/notes.md)
-- 🎯 [Interview Questions](./02-exception-hierarchy/interview-questions.md)
+* `Throwable` as the root class
+
+* `Error` vs `Exception` vs `RuntimeException`
+
+* Why `RuntimeException` exists
+
+* Recoverable vs non-recoverable failures
+
+* Modern backend exception philosophy
+
+* Where exceptions should be handled or propagated
+
+* 📘 [Notes](./02-exception-hierarchy/notes.md)
+
+* 🎯 [Interview Questions](./02-exception-hierarchy/interview-questions.md)
 
 ---
 
 ### 03. Custom Exceptions & Best Practices
 
-**Concepts**
-- Why custom exceptions are needed
-- Checked vs unchecked custom exceptions
-- Exception wrapping & preserving root cause
-- Exception translation across layers
-- Logging exceptions correctly (log once)
-- Fail-fast principle
-- Why exceptions should not be used for control flow
+**Concepts Covered**
 
-- 📘 [Notes](./03-custom-exceptions/notes.md)
-- 🎯 [Interview Questions](./03-custom-exceptions/interview-questions.md)
+* Purpose of custom exceptions
+
+* Checked vs unchecked custom exceptions
+
+* Exception wrapping and preserving root cause
+
+* Exception translation across application layers
+
+* Correct logging strategy (log once principle)
+
+* Fail-fast design philosophy
+
+* Why exceptions should not be used for normal control flow
+
+* 📘 [Notes](./03-custom-exceptions/notes.md)
+
+* 🎯 [Interview Questions](./03-custom-exceptions/interview-questions.md)
 
 ---
 
-## 🎯 How to Use This for Interviews
+## 🎯 How to Use This Section for Interviews
 
-- **0 Level / Freshers**
-  - Lesson 01 (complete)
-  - Basic understanding of Lesson 02
+### Freshers (0 YOE)
 
-- **1–2 YOE**
-  - Lesson 01 + Lesson 02 (complete)
-  - Key practices from Lesson 03
+* Complete **Lesson 01**
+* Understand core hierarchy concepts from **Lesson 02**
 
-- **2–3 YOE**
-  - All lessons
-  - Focus on:
-    - RuntimeException philosophy
-    - Exception translation
-    - Logging strategy
-    - Fail-fast design
+---
 
-- **Before interview**
-  - Read only `interview-questions.md` from each lesson
+### Junior Backend (1–2 YOE)
+
+* Master **Lesson 01** and **Lesson 02**
+* Learn practical practices from **Lesson 03**
+
+Focus on:
+
+* Checked vs unchecked reasoning
+* Exception propagation
+* RuntimeException philosophy
+
+---
+
+### Backend Developer (2–3 YOE)
+
+* Study all lessons thoroughly
+* Emphasize:
+
+  * RuntimeException design decisions
+  * Exception translation across layers
+  * Logging strategy and observability
+  * Fail-fast validation
+
+---
+
+### Final Revision Strategy
+
+Before interviews:
+
+1. Read only `interview-questions.md` from each lesson
+2. Review twisted or scenario-based questions
+3. Practice explaining **why** decisions are made, not just definitions
 
 ---
 
 ## 🧠 Author’s Note
 
-These notes were created while preparing for **Java Backend interviews**, with focus on:
-- Conceptual clarity over syntax
-- Design intent behind Java exceptions
-- Real backend and Spring-style practices
-- Common interviewer traps and anti-patterns
+These notes were created during preparation for **Java Backend interviews**, focusing on:
 
-This section is designed to help you **explain exceptions confidently**, not just write try–catch blocks.
+* conceptual clarity over syntax memorization
+* design intent behind Java’s exception model
+* real backend and Spring-style practices
+* common interviewer traps and anti-patterns
+
+The goal is to help you **explain exception handling confidently**, not just write `try–catch` blocks.
 
 ---
+
