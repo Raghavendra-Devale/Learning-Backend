@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 
 # ✅ LEVEL 0 – Academic
 
@@ -25,11 +26,28 @@ class Animal {
 
 class Dog extends Animal {
     void bark() {}
+=======
+# ✅ LEVEL 0 – Academic
+
+### 1️⃣ What is inheritance?
+
+Inheritance allows a class to acquire properties and behavior of another class.
+
+It establishes an **IS-A** relationship.
+
+---
+
+### 2️⃣ Syntax in Java
+
+```java
+class Child extends Parent {
+>>>>>>> 6d3be277722b1861a259bd4cbd526922b25b1e97
 }
 ```
 
 ---
 
+<<<<<<< HEAD
 ### 3. What is the purpose of inheritance?
 
 * Code reusability
@@ -59,11 +77,45 @@ Used to:
 * Access parent class constructor → `super()`
 * Access parent methods → `super.method()`
 * Access parent variables → `super.variable`
+=======
+### 3️⃣ Purpose of inheritance
+
+* Code reuse
+* Runtime polymorphism
+* Establish hierarchy
+
+But reuse is not the primary design goal — modeling behavior is.
+
+---
+
+### 4️⃣ What is method overriding?
+
+When a subclass provides its own implementation of a parent method with the same signature.
+
+Enables runtime polymorphism.
+
+---
+
+### 5️⃣ What is `super` keyword?
+
+Used to:
+
+* Access parent class methods
+* Call parent constructor
+* Refer to parent fields
+
+Example:
+
+```java
+super.display();
+```
+>>>>>>> 6d3be277722b1861a259bd4cbd526922b25b1e97
 
 ---
 
 # ✅ LEVEL 1 – Fresher
 
+<<<<<<< HEAD
 ### 1. What is IS-A relationship?
 
 If class B extends class A, then B **IS-A** A.
@@ -90,10 +142,38 @@ Example:
 ```
 Car HAS-A Engine  (Composition)
 Dog IS-A Animal   (Inheritance)
+=======
+### 1️⃣ What is IS-A relationship?
+
+If `Dog extends Animal`, then:
+
+> Dog **is a** Animal.
+
+Inheritance must represent a true subtype relationship.
+
+---
+
+### 2️⃣ Inheritance vs Composition
+
+| Inheritance          | Composition       |
+| -------------------- | ----------------- |
+| IS-A                 | HAS-A             |
+| Tight coupling       | Loose coupling    |
+| Compile-time binding | Flexible design   |
+| Less flexible        | More maintainable |
+
+Example:
+
+```java
+class Car {
+    private Engine engine; // composition
+}
+>>>>>>> 6d3be277722b1861a259bd4cbd526922b25b1e97
 ```
 
 ---
 
+<<<<<<< HEAD
 ### 3. Why Java does not support multiple inheritance of classes?
 
 To avoid ambiguity and the **diamond problem**.
@@ -172,6 +252,73 @@ Any change in parent impacts child.
 ---
 
 ### 5. Can private methods be overridden?
+=======
+### 3️⃣ Why no multiple inheritance of classes in Java?
+
+To avoid ambiguity and complexity (diamond problem).
+
+Java supports multiple inheritance via interfaces instead.
+
+---
+
+### 4️⃣ What is diamond problem?
+
+Occurs when a class inherits from two classes having same method.
+
+Ambiguity: which method to use?
+
+Java avoids it by not allowing multiple class inheritance.
+
+---
+
+### 5️⃣ Can constructors be inherited?
+
+No.
+
+Constructors are not inherited, but parent constructor is called using `super()`.
+
+---
+
+# ✅ LEVEL 2 – 1–2 YOE
+
+### 1️⃣ What is fragile base class problem?
+
+When changes in parent class break child classes unexpectedly.
+
+Subclasses depend heavily on parent implementation details.
+
+---
+
+### 2️⃣ Why is inheritance tight coupling?
+
+Because:
+
+* Child depends on parent’s internal implementation
+* Parent changes ripple downward
+* Hard to refactor independently
+
+---
+
+### 3️⃣ What happens if parent method changes?
+
+* Child behavior may break
+* Overridden logic may conflict
+* Polymorphic contracts may fail
+
+---
+
+### 4️⃣ Method overriding rules
+
+* Same method signature
+* Cannot reduce visibility
+* Cannot throw broader checked exceptions
+* Return type can be covariant
+* Cannot override final or static methods
+
+---
+
+### 5️⃣ Can private methods be overridden?
+>>>>>>> 6d3be277722b1861a259bd4cbd526922b25b1e97
 
 No.
 
@@ -179,6 +326,7 @@ Private methods are not visible to subclasses.
 
 ---
 
+<<<<<<< HEAD
 ### 6. What is covariant return type?
 
 Child method can return a more specific type than parent method.
@@ -192,10 +340,22 @@ class Dog extends Animal {
     @Override
     Dog getAnimal() {}   // Allowed
 }
+=======
+### 6️⃣ What is covariant return type?
+
+Overridden method can return subtype of parent method return type.
+
+Example:
+
+```java
+Parent get();
+Child get(); // valid
+>>>>>>> 6d3be277722b1861a259bd4cbd526922b25b1e97
 ```
 
 ---
 
+<<<<<<< HEAD
 ### 7. Why should inheritance not be used just for reuse?
 
 Because:
@@ -338,6 +498,135 @@ Deep hierarchy → more fields → larger object size.
 ---
 
 ### 7. Can static methods be overridden?
+=======
+### 7️⃣ Why inheritance should not be used just for reuse?
+
+Because:
+
+* It forces IS-A relationship
+* Creates tight coupling
+* Makes hierarchy rigid
+
+Reuse via composition is safer.
+
+---
+
+# ✅ LEVEL 3 – 2–3 YOE
+
+### 1️⃣ When prefer composition over inheritance?
+
+* When relationship is HAS-A
+* When behavior may change
+* When flexibility is required
+* In service-layer/backend design
+
+Modern systems favor composition.
+
+---
+
+### 2️⃣ How inheritance breaks encapsulation?
+
+Child class gains access to protected members and internal behavior.
+
+This exposes implementation details to subclasses.
+
+---
+
+### 3️⃣ How inheritance can cause concurrency issues?
+
+If parent class is not thread-safe:
+
+* Subclass may override methods incorrectly
+* Synchronization logic may be bypassed
+* Shared mutable state becomes unsafe
+
+---
+
+### 4️⃣ What is Liskov Substitution Principle (LSP)?
+
+Subtypes must be replaceable for their base types without breaking behavior.
+
+If `Square extends Rectangle` breaks expectations, LSP is violated.
+
+---
+
+### 5️⃣ How inheritance affects maintainability?
+
+Deep hierarchies:
+
+* Hard to trace logic
+* Hard to debug
+* Changes have ripple effects
+
+---
+
+### 6️⃣ How frameworks safely use inheritance?
+
+Frameworks often:
+
+* Use template method pattern
+* Provide abstract base classes
+* Control extension points carefully
+* Mark critical methods as final
+
+Example: Servlet API, Spring base classes.
+
+---
+
+# ✅ Senior / Twisted
+
+### 1️⃣ Can inheritance exist without polymorphism?
+
+Technically yes (if methods not overridden),
+but its real power comes from polymorphism.
+
+---
+
+### 2️⃣ Is inheritance required for reuse?
+
+No.
+
+Composition and delegation can achieve reuse.
+
+---
+
+### 3️⃣ What if overridden method throws broader exception?
+
+Not allowed for checked exceptions.
+
+It would break polymorphism.
+
+---
+
+### 4️⃣ Why deep hierarchies are dangerous?
+
+* Fragile
+* Hard to reason about
+* Violates SRP
+* Ripple effects
+
+---
+
+### 5️⃣ Can inheritance increase memory footprint?
+
+Yes.
+
+If parent has unnecessary fields, every subclass object carries them.
+
+---
+
+### 6️⃣ How does final method affect inheritance?
+
+Final methods:
+
+* Cannot be overridden
+* Protect behavior
+* Preserve invariants
+
+---
+
+### 7️⃣ Can static methods be overridden?
+>>>>>>> 6d3be277722b1861a259bd4cbd526922b25b1e97
 
 No.
 
@@ -345,6 +634,7 @@ Static methods are hidden, not overridden.
 
 ---
 
+<<<<<<< HEAD
 # 🚫 Common Traps (Interview Awareness)
 
 * Inheritance ≠ just reuse
@@ -360,3 +650,10 @@ Static methods are hidden, not overridden.
 > Inheritance establishes an IS-A relationship and enables runtime polymorphism. However, it introduces tight coupling and fragility. Modern backend systems often prefer composition to achieve flexibility and maintainability while reducing the risks associated with deep inheritance hierarchies.
 
 ---
+=======
+# 🎯 Interview-Safe Summary
+
+> Inheritance models an IS-A relationship and enables runtime polymorphism, but it creates tight coupling between classes. Because of fragility and reduced flexibility, modern backend systems prefer composition over deep inheritance hierarchies.
+
+---
+>>>>>>> 6d3be277722b1861a259bd4cbd526922b25b1e97
